@@ -1,0 +1,351 @@
+:root {
+    --c-primario: #2f5d50;      /* botón principal del modal */
+    --c-texto: #2b2b33;
+    --c-superficie: #ffffff;    /* fondo de toasts y modales */
+    --c-exito: #2f7d4f;
+    --c-error: #c62828;
+    --c-aviso: #b7791f;
+    --c-info: #3a6ea5;
+    --c-foco: #e0a020;          /* contorno al navegar con teclado */
+    --c-fuente: Georgia, serif;
+}
+
+/* ---------- Toast: contenedores por posición ---------- */
+.toast-contenedor {
+    position: fixed; z-index: 1000;
+    display: flex; flex-direction: column; gap: .6rem;
+    width: min(22rem, calc(100% - 2rem));
+    pointer-events: none; /* el contenedor no bloquea clics; cada toast sí los recibe */
+}
+
+.toast-arriba-derecha { 
+    top: 1rem;    
+    right: 1rem; 
+}
+
+.toast-arriba-izquierda { 
+    top: 1rem;    
+    left: 1rem; 
+}
+
+.toast-abajo-derecha { 
+    bottom: 1rem; 
+    right: 1rem; 
+    flex-direction: column-reverse; 
+}
+
+.toast-abajo-izquierda{ 
+    bottom: 1rem; 
+    left: 1rem;  
+    flex-direction: column-reverse; 
+}
+
+/* ---------- Toast ---------- */
+.toast {
+    --toast-color: var(--c-info);
+    position: relative; 
+    overflow: hidden; 
+    pointer-events: auto;
+    display: flex; 
+    align-items: flex-start; 
+    gap: .75rem;
+    padding: .85rem 2.2rem .95rem .85rem;
+    background: var(--c-superficie); 
+    color: var(--c-texto);
+    border-left: 5px solid var(--toast-color);
+    border-radius: .6rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .18);
+    font: 15px/1.4 var(--c-fuente);
+    animation: toast-entra .3s ease-out;
+}
+
+.toast-exito { 
+    --toast-color: var(--c-exito); 
+}
+.toast-error { 
+    --toast-color: var(--c-error); 
+}
+.toast-aviso { 
+    --toast-color: var(--c-aviso); 
+}
+.toast-info  { 
+    --toast-color: var(--c-info); 
+}
+
+.toast-icono {
+    flex: none; 
+    width: 1.6rem; 
+    height: 1.6rem; 
+    border-radius: 50%;
+    display: grid; 
+    place-items: center;
+    background: var(--toast-color); 
+    color: #fff; 
+    font-weight: bold; 
+    font-size: .85rem;
+}
+.toast-cuerpo { 
+    min-width: 0; 
+}
+.toast-titulo { 
+    display: block; 
+}
+.toast-mensaje { 
+    margin: 0; 
+    -wrap: anywhere; 
+}
+
+.toast-cerrar {
+    position: absolute; 
+    top: .3rem; 
+    right: .4rem;
+    width: 1.6rem; 
+    height: 1.6rem; 
+    padding: 0;
+    border: 0; 
+    background: none; 
+    color: #666; 
+    font-size: 1.3rem; 
+    line-height: 1; 
+    cursor: pointer;
+}
+
+.toast-cerrar:hover { 
+    color: #000; 
+}
+
+.toast-cerrar:focus-visible { 
+    outline: 2px solid var(--toast-color); 
+    border-radius: 4px; 
+}
+
+/* Barra de tiempo restante */
+.toast-barra {
+    position: absolute; 
+    left: 0; 
+    bottom: 0; 
+    height: 4px; 
+    width: 100%;
+    background: var(--toast-color); 
+    opacity: .5;
+    transform-origin: left; 
+    animation: toast-barra linear forwards;
+}
+
+.toast:hover .toast-barra{ 
+    animation-play-state: paused; 
+}
+
+.toast-saliendo { 
+    animation: toast-sale .25s ease-in forwards; 
+}
+
+@keyframes toast-entra { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: none; } }
+@keyframes toast-sale  { to   { opacity: 0; transform: scale(.95); } }
+@keyframes toast-barra { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+
+@media (prefers-reduced-motion: reduce) {.toast, .toast-saliendo { animation-duration: .01s; }}
+
+/* ---------- Modal ---------- */
+.modal-fondo {
+    position: fixed; 
+    inset: 0; 
+    z-index: 2000; 
+    display: grid; 
+    place-items: center; 
+    padding: 1rem;
+    background: rgba(8, 12, 20, .7); 
+    backdrop-filter: blur(3px); 
+    animation: modal-fondo-entra .2s ease-out;
+}
+.modal-caja {
+    position: relative; 
+    width: min(30rem, 100%); 
+    max-height: 90vh; 
+    overflow-y: auto;
+    padding: 2rem 1.6rem 1.4rem; 
+    text-align: center;
+    background: var(--c-superficie); 
+    color: var(--c-texto); 
+    border-radius: 1rem; 
+    font: 16px/1.5 var(--c-fuente);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, .5); 
+    animation: modal-entra .25s ease-out;
+}
+
+.modal-icono { 
+    font-size: 3rem; 
+    line-height: 1;
+}
+
+.modal-titulo { 
+    margin: .4rem 0 .6rem; 
+    font-size: 1.5rem; 
+}
+
+.modal-contenido p{ 
+    margin: 0; 
+}
+
+.modal-pie { 
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: .6rem; 
+    margin-top: 1.4rem; 
+}
+
+.modal-boton{
+    padding: .6rem 1.1rem; 
+    font: inherit; 
+    cursor: pointer; 
+    border-radius: .5rem;
+    border: 1px solid var(--c-primario); 
+    background: var(--c-superficie); 
+    color: var(--c-texto);
+}
+.modal-boton-principal { 
+    background: var(--c-primario); 
+    border-color: var(--c-primario); 
+    color: #fff; 
+}
+
+.modal-boton:hover { 
+    opacity: .88;
+}
+
+.modal-x{
+    position: absolute; 
+    top: .5rem; 
+    right: .7rem; 
+    width: 2rem; 
+    height: 2rem; 
+    padding: 0;
+    border: 0; 
+    background: none; 
+    font-size: 1.6rem; 
+    line-height: 1; 
+    color: #666; 
+    cursor: pointer;
+}
+
+.modal-boton:focus-visible, .modal-x:focus-visible{ 
+    outline: 3px solid var(--c-foco); 
+    outline-offset: 2px; 
+}
+
+.modal-saliendo{ 
+    opacity: 0; 
+    transition: opacity .2s;
+}
+
+@keyframes modal-fondo-entra { from { opacity: 0; } }
+@keyframes modal-entra { from { opacity: 0; transform: translateY(14px) scale(.97); } }
+
+/* ---------- Carrusel ---------- */
+.carrusel { 
+    position: relative; 
+    overflow: hidden; 
+    border-radius: 1.2rem; 
+    outline-offset: 4px; 
+}
+
+.carrusel-pista { 
+    display: flex; 
+    transition: transform .5s cubic-bezier(.4, 0, .2, 1); 
+}
+
+.carrusel-slide {
+    position: relative; 
+    flex: none; 
+    width: 100%; 
+    height: clamp(38rem, 55vw, 26rem);
+    display: grid; place-items: center;
+    background: radial-gradient(circle at 50% 35%, var(--c1), var(--c2));
+}
+
+.carrusel-slide img { 
+    position: absolute; 
+    inset: 0; width: 100%; 
+    height: 100%; object-fit: cover; 
+}
+
+.carrusel-glifo { 
+    font-size: clamp(5rem, 16vw, 8rem); 
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .45)); 
+}
+
+.carrusel-texto {
+    position: absolute; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    padding: 2.5rem 1rem 2.2rem; 
+    text-align: center;
+    color: #fff; 
+    background: linear-gradient(transparent, rgba(0, 0, 0, .65));
+}
+
+.carrusel-texto h3 { 
+    margin: 0; 
+    font-size: 1.7rem; 
+}
+
+.carrusel-texto p { 
+    margin: .2rem 0 0; 
+    opacity: .9; 
+}
+
+.carrusel-flecha {
+    position: absolute; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    width: 2.6rem; 
+    height: 2.6rem;
+    border: 0; 
+    border-radius: 50%; 
+    background: rgba(0, 0, 0, .4); 
+    color: #fff; 
+    font-size: 1.8rem; 
+    line-height: 1;
+    cursor: pointer;
+}
+
+.carrusel-flecha:hover { 
+    background: rgba(0, 0, 0, .65); 
+}
+
+.carrusel-anterior { 
+    left: .7rem; 
+}
+
+.carrusel-siguiente { 
+    right: .7rem; 
+}
+
+.carrusel-puntos { 
+    position: absolute; 
+    bottom: .8rem; 
+    left: 0; 
+    right: 0; 
+    display: flex; 
+    justify-content: center; 
+    gap: .45rem; 
+}
+
+.carrusel-puntos button {
+    width: .65rem; 
+    height: .65rem; 
+    padding: 0; 
+    border: 0; 
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .45); 
+    cursor: pointer;
+}
+
+.carrusel-puntos button[aria-current="true"] { 
+    background: var(--c-superficie); 
+    transform: scale(1.3); 
+}
+
+@media (prefers-reduced-motion: reduce) { .carrusel-pista { transition: none; } .modal-caja, .modal-fondo { animation: none; } }

@@ -1,0 +1,102 @@
+:root {
+    --color-primario: #e8c56a;     /* dorado: botones, bordes */
+    --color-secundario: #d4ad4f;   /* dorado oscuro: hover */
+    --color-fondo: #1a2233;        /* azul noche */
+    --color-resplandor: #3b3563;   /* luz morada de arriba */
+    --color-noche: #0e1420;        /* fondo más oscuro (abajo) */
+    --color-texto: #efe7d6;
+    --color-texto-suave: #c9c0d8;
+    --color-borde: #5a5480;
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Georgia, serif;
+    line-height: 1.6;
+    color: var(--color-texto);
+    background: radial-gradient(ellipse at 50% -10%, var(--color-resplandor) 0%, var(--color-fondo) 45%, var(--color-noche) 100%) fixed;
+}
+
+a {
+    text-decoration: none;
+}
+
+header {
+    text-align: center;
+    padding: 3rem 1rem 1.5rem;
+}
+
+h1 {
+    font-size: clamp(2rem, 6vw, 3.4rem);
+    letter-spacing: .02em;
+}
+
+.descripcion {
+    max-width: 36rem;
+    margin: .8rem auto 0;
+    color: var(--color-texto-suave);
+}
+
+main {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 0 1rem 3rem;
+}
+
+#aquelarres {
+    margin-bottom: 1.4rem;
+    border: 2px solid var(--color-borde);
+}
+
+.grupo-doble {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .8rem;
+}
+
+.boton {
+    padding: .8rem 1.4rem;
+    cursor: pointer;
+    border-radius: 2rem;
+    border: 1px solid var(--color-primario);
+    background: transparent;
+    color: var(--color-primario);
+    transition: transform .2s, background .2s;
+}
+
+.boton-lleno {
+    background: var(--color-primario);
+    color: var(--color-fondo);
+    font-weight: bold;
+}
+
+.boton:hover {
+    transform: translateY(-2px);
+}
+
+.boton-lleno:hover {
+    background: var(--color-secundario);
+}
+
+.boton:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+}
+
+.texto-boton {
+    font-family: inherit;
+    font-size: 1.05rem;
+}
+
+footer {
+    text-align: center;
+    padding: 0 1rem 2rem;
+    font-size: .85rem;
+    color: #8f88a3;
+}
