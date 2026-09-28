@@ -206,9 +206,11 @@ Toast de éxito:
 
 ## GitPage
 
+https://bricortestec.github.io/Actividad3-PW/
+
 ## Video 
 
-_Pega aquí el link del video (máx. 1 minuto)._
+
 
 ### Aclaraciones
 Página de fans sin fines de lucro. *The Owl House* pertenece a Dana Terrace y Disney.
