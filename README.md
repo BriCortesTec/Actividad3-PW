@@ -210,7 +210,7 @@ https://bricortestec.github.io/Actividad3-PW/
 
 ## Video 
 
-
+[Ver demostración de los componentes](./img/actividad3.mp4)
 
 ### Aclaraciones
 Página de fans sin fines de lucro. *The Owl House* pertenece a Dana Terrace y Disney.
